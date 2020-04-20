@@ -3,7 +3,7 @@ const mongoose=require('mongoose');
 const deviceSchema=mongoose.Schema({
     name:{type:String , required:true , unique:true},
     type:{type:String , required:true},
-    status:{type:Boolean , required:true},
+    status:{type:String , required:true},
     value:{type:Number},
     min:{type:Number},
     max:{type:Number},

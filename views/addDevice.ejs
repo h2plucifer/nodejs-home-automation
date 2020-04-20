@@ -3,12 +3,13 @@
 
 
 
-<form action="/deviceAPI/device" method="POST">
-    <input type="text" name="deviceName" id="deviceName" placeholder ="Give device name" required>
-    <input type="text" name="deviceType" id="deviceType" placeholder ="Give device type" required>
-    <input type="text" name="deviceStatus" id="deviceStatus" placeholder ="Give device status (ON/OFF)" required>
-    <button id="addDevice" class="bg-info">Submit</button>
+<form action="/deviceAPI/device" method="POST" >
+    <input style="width:25%" type="text" name="deviceName" id="deviceName" placeholder ="Device name" required>
+    <input style="width:25%"  type="text" name="deviceType" id="deviceType" placeholder ="Device type (light/fan..)" required>
+    <input style="width:25%" type="text" name="deviceStatus" id="deviceStatus" placeholder ="Device status(true=ON/false=OFF)" required>
+    <button  class="btn btn-dark" id="addDevice" class="bg-info">Submit</button>
     <p/>
 </form>
+
 
 

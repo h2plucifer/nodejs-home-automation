@@ -4,22 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+   
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
     <title>Home Automation</title>
+    <style>
+        .jumbotron{
+            padding: 30px;
+            margin:15px 0
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="container ">
+<div class="container  border border-secondary rounded">
     
-    <div class="jumbotron text-center h-4">
+    <div class="jumbotron bg-danger text-center  text-light">
             <h2>Welcome to Home Automation</h2>
     </div>
 
 
     <% if(devices){ %>
         <div id="table">
-        <table class=" table table-bordered table-striped"> 
+        <table class=" table table-bordered t table-striped"> 
                <thead class="bg-info text-center text-light ">
                    <tr>
                        <th>Device Name</th>
@@ -35,7 +42,7 @@
                   <% for(let device of devices ){%>
                     <tr>
                         <td ><%= device.name %></td>
-                        <td id='<%= device.name %>'><% if(device.status==true) { %>
+                        <td id='<%= device.name %>'><% if(device.status=='true') { %>
                                 <button  type="button" class="btn btn-success btn-round statusBtn" >ON</button>
                                 <%}else {%>
                                 <button class="btn btn-warning statusBtn" >OFF</button>
@@ -65,6 +72,7 @@
 </div>
 
 <script>
+    /************ Client Jquery event handling ************/
     $(function(){
     
     $('#addButton').click(()=>{        
@@ -73,8 +81,55 @@
     })
 
 
+    $('td>.statusBtn ').click((e)=>{          
+             $val=$(e.target).text();
+             $deviceName=$(e.target).parent().attr('id');
+             var $status;
+             if($val=="ON"){
+                 $status=true;
+                $(e.target).text("OFF");
+                $(e.target).removeClass("bg-success");
+                $(e.target).addClass("bg-warning");
+                $.ajax({ url: '/deviceAPI/deviceStatus/'+$deviceName, method: 'PUT', dataType: 'json',data:{status:'true'}})
+                    .then(function() {
+                      console.log("Device status updated")
+                    })}
+            else{
+                $status=false;
+                $(e.target).text("ON");
+                $(e.target).removeClass("bg-warning");
+                $(e.target).addClass("bg-success");
+                $.ajax({ url: '/deviceAPI/deviceStatus/'+$deviceName, method: 'PUT',dataType: 'json',data:{status:'false'},
+                    success:function(){
+                        location.reload()
+                    }
+                })
+                    .then(function() {
+                      console.log("Device status updated")
+                    })}
+                })
 
+                
+    $('#valueButton').click((e)=>{          
+                $val=$('#deviceValue').val();
+                $deviceName= $(e.target).parent().prop('className');
+                $.ajax({ url: '/deviceAPI/deviceValue/'+$deviceName, method: 'PUT' , data:{value:$val}})
+                    .then(function() {
+                      console.log("Device value updated");
+                      window.location.reload();
+                    })
+                })
 
+    
+    $('td > #removeDevice').click((e)=>{
+            $deviceName=$(e.target).parent().attr('class');
+            $.ajax({ url: '/deviceAPI/deviceRemove/'+$deviceName,
+                     method: 'DELETE',
+                     success:function(){
+                         console.log("success---------------------------")
+                        location.reload()
+                    }})
+                    })  
     })
 </script>
 

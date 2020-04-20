@@ -1,5 +1,6 @@
-const mongoose=require('mongoose');
+
 const router=require('express').Router();
+const Devices=require('../model/device')
 
 //Some default properties of device
 const deviceDefaults={
@@ -26,6 +27,7 @@ function dummyValueFiller(device){
 
 //API to add new device
 router.route('/device')
+            .get((req,res)=>{  res.render("addDevice"); })
             .post((req,res)=>{
                 console.log("Adding New Device ...");
                 if(req.body){
@@ -51,19 +53,41 @@ router.route('/device')
 router.route('/deviceStatus/:deviceName')
             .put((req,res)=>{
                 console.log("Device Status Updation ...");
+                if(req.params.deviceName){
+                    
+                    req.body.status=(req.body.status=='true')?"false":"true";
+                    
+                    Devices.update({name:req.params.deviceName}, {$set:{status:req.body.status}},{new:true},(err,doc)=>{
+                        if(!err){
+                    
+                            res.redirect("/")
+                        }
+                        
+                    })
+                }
             })
 
 //API to change value of specific device 
 router.route('/deviceValue/:deviceName')
             .put((req,res)=>{
                 console.log("Device Value Updation ...");
+                Devices.findOneAndUpdate({name:req.params.deviceName},{value:req.body.value} ,{new:true} ,(err,doc)=>{
+                    if(!err){
+                        console.log(doc.name +"value updated successfully")
+                        res.redirect("/")
+                    }
+                })
             })
 
 //API to remove specific device from home automation monitoring            
 router.route('/deviceRemove/:deviceName')
             .delete((req,res)=>{
-                console.log("Device Removal ...")
+                console.log("Device Removal ...");
+                Devices.findOneAndRemove({name:req.params.deviceName},(err,doc)=>{
+                console.log(doc +" deleted");
+                res.redirect("/");
             })
+        })
             
 
 module.exports=router;

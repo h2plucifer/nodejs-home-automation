@@ -3,9 +3,10 @@ const express=require('express'),
       ejs=require('ejs'),
       bodyParser=require('body-parser'),
       mongoose=require('mongoose'),
-      logger=require('morgan')
-      dbURL=require('./configuration/dbConfig')
-      Devices=require('./model/device')
+      logger=require('morgan'),
+      dbURL=require('./configuration/dbConfig'),
+      Devices=require('./model/device'),
+      routes=require('./routes/routes')
 
 const app=express();
 const PORT=process.env.PORT||8080;
@@ -18,13 +19,15 @@ else console.log("Server connected to DB "+Object.keys(db));
 
 //{name:'deviceLight', type:"light"  ,status:true ,  value:50 },
 
+
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(logger('combined'));
 app.set('views',path.join(__dirname,"views"));
 app.set('view engine',"ejs");
 
-
+app.use('/deviceAPI',routes);
 app.get('/',(req,res)=>{
     Devices.find({},(err,data)=>{
         res.render("index",{devices:data}) 
