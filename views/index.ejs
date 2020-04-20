@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    <title>Home Automation</title>
+</head>
+
+<body>
+
+<div class="container ">
+    
+    <div class="jumbotron text-center h-4">
+            <h2>Welcome to Home Automation</h2>
+    </div>
+
+
+    <% if(devices){ %>
+        <div id="table">
+        <table class=" table table-bordered table-striped"> 
+               <thead class="bg-info text-center text-light ">
+                   <tr>
+                       <th>Device Name</th>
+                       <th>Device Status</th>
+                       <th>Device Value</th>
+                       <th>Remove Device</th>
+                   </tr>
+               </thead>
+
+
+
+               <tbody class="text-center">    
+                  <% for(let device of devices ){%>
+                    <tr>
+                        <td ><%= device.name %></td>
+                        <td id='<%= device.name %>'><% if(device.status==true) { %>
+                                <button  type="button" class="btn btn-success btn-round statusBtn" >ON</button>
+                                <%}else {%>
+                                <button class="btn btn-warning statusBtn" >OFF</button>
+                                <% } %>
+                        </td>
+                        <td id="valueTD" class='<%= device.name %>  '>
+                                <% if(device.value){ %>
+                                <button  type="button" class="btn btn-dark"><%= device.value %></button>
+                                <input type='number' name="deviceValue" id="deviceValue" />
+                                <button class="btn btn-outline-danger" id="valueButton" type="submit">Change</button>
+                                <%}%>
+                        </td>
+                        <td class='<%= device.name %>'><button  tye="button" id="removeDevice"  class="btn btn-danger">Remove</button></td>
+                    </tr>
+                   <% } %>
+                </tbody>
+            </div>
+            <%}%>
+               
+
+            <button type="button" id="addButton" class="btn btn-primary">Add New Device</button>
+            <p/><p/>
+
+    <div id="addDevice-form" class="w-2   bg-primary">
+    </div>
+
+</div>
+
+<script>
+    $(function(){
+    
+    $('#addButton').click(()=>{        
+            $('#addDevice-form').load('/deviceAPI/device');
+            $('#addDevice-form').addClass('p-4')
+    })
+
+
+
+
+    })
+</script>
+
+</body>
+</html>
