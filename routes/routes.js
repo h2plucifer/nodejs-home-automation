@@ -69,7 +69,7 @@ router.route('/deviceStatus/:deviceName')
 
 //API to change value of specific device 
 router.route('/deviceValue/:deviceName')
-            .put((req,res)=>{
+            .post((req,res)=>{
                 console.log("Device Value Updation ...");
                 Devices.findOneAndUpdate({name:req.params.deviceName},{value:req.body.value} ,{new:true} ,(err,doc)=>{
                     if(!err){
@@ -81,7 +81,7 @@ router.route('/deviceValue/:deviceName')
 
 //API to remove specific device from home automation monitoring            
 router.route('/deviceRemove/:deviceName')
-            .delete((req,res)=>{
+            .post((req,res)=>{
                 console.log("Device Removal ...");
                 Devices.findOneAndRemove({name:req.params.deviceName},(err,doc)=>{
                 console.log(doc +" deleted");
