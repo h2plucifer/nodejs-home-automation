@@ -4,9 +4,21 @@
 
 
 <form action="/deviceAPI/device" method="POST" >
-    <input style="width:25%" type="text" name="deviceName" id="deviceName" placeholder ="Device name" required>
-    <input style="width:25%"  type="text" name="deviceType" id="deviceType" placeholder ="Device type (light/fan..)" required>
-    <input style="width:25%" type="text" name="deviceStatus" id="deviceStatus" placeholder ="Device status(true=ON/false=OFF)" required>
+    <input  type="text" name="deviceName" id="deviceName" placeholder ="Device name" required>
+    <!-- <input   type="text" name="deviceType" id="deviceType" placeholder ="Device type (light/fan..)" required>
+    <input  type="text" name="deviceStatus" id="deviceStatus" placeholder ="Device status(true=ON/false=OFF)" required> -->
+
+    <select name="deviceType" id="deviceType">
+        <option value="fan">fan</option>
+        <option value="ac">ac</option>
+        <option value="light">light</option>
+        <option value="sound">speaker</option>
+      </select>
+      <select name="deviceStatus" id="deviceStatus">
+        <option value="true">ON</option>
+        <option value="false">OFF</option>
+      </select>
+
     <button  class="btn btn-dark" id="addDevice" class="bg-info">Submit</button>
     <button  class="btn btn-dark" id="dontAdd" class="bg-outline-info">Don't Add</button>
 

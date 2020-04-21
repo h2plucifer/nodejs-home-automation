@@ -114,9 +114,9 @@
                 
     $('.valueButton').click((e)=>{          
         console.log("value btn pressed.............")
-                //$val=$('.deviceValue').val();
+               
                 $val=$(e.target).siblings('.deviceValue').val();
-                alert($val)
+               
                 $deviceName= $(e.target).parent().prop('className');
                 $.ajax({ url: '/deviceAPI/deviceValue/'+$deviceName, type:"POST" , data:{value:$val}})
                     .then(function() {
