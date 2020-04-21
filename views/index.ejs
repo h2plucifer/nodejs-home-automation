@@ -139,7 +139,6 @@
     $('td > #removeDevice').click((e)=>{
             $deviceName=$(e.target).parent().attr('class');
             $.ajax({ url: '/deviceAPI/deviceRemove/'+$deviceName,
-                    //  type: 'DELETE',
                     type: "POST", data: {_method: "delete"},
                      success:function(){
                          console.log("success---------------------------")
