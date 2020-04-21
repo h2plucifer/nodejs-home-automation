@@ -4,7 +4,7 @@ const Devices=require('../model/device')
 
 //Some default properties of device
 const deviceDefaults={
-    'fan':{value:3,min:0,max:10},
+    'fan':{value:3,min:0,max:5},
     'ac':{value:24,min:16,max:28},
     'sound':{value:5,min:0,max:10},
     'light':{}

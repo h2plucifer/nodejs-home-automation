@@ -24,7 +24,7 @@
     </div>
 
     
-    <!-- <% if(devices){ %> -->
+    <% if(devices){ %>
         <div id="table">
         <table class=" table table-bordered t table-striped"> 
                <thead class="bg-info text-center text-light ">
@@ -39,7 +39,16 @@
 
 
                <tbody class="text-center">    
-                  <% for(let device of devices ){%>
+                  <% for(let device of devices ){  %>
+                   <% var min,max;
+                    switch(device.type){
+                        case "fan":min=0;max=5; break;
+                        case "ac":min=16;max=28; break;
+                        case "sound":min=0;max=10; break;
+
+                    }  
+                    %> 
+
                     <tr>
                         <td ><%= device.name %></td>
                         <td id='<%= device.name %>'><% if(device.status=='true') { %>
@@ -51,16 +60,17 @@
                         <td id="valueTD" class='<%= device.name %>  '>
                                 <% if(device.value){ %>
                                 <button  type="button" class="btn btn-dark"><%= device.value %></button>
-                                <input type='number' name="deviceValue" class="deviceValue" />
+                                <input required type='number' name="deviceValue" class="deviceValue" min="<%= min %>" max="<%= max %>" />
                                 <button class="btn btn-outline-danger valueButton" type="submit">Change</button>
                                 <%}%>
                         </td>
+                        
                         <td class='<%= device.name %>'><button  tye="button" id="removeDevice"  class="btn btn-danger">Remove</button></td>
                     </tr>
                    <% } %>
                 </tbody>
             </div>
-            <!-- <%}%> -->
+            <%}%>
                
 
             <button type="button" id="addButton" class="btn btn-primary">Add New Device</button>
