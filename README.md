@@ -2,6 +2,7 @@
 
 
 * Application details  :
+  *first
               * Home-Automation is a web based application that provides features to monitor home devices remotely using this app.
               * Following operations can be performed with this app  :
                     * Add new device to monitor /control.
