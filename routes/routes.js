@@ -70,7 +70,7 @@ router.route('/deviceStatus/:deviceName')
 //API to change value of specific device 
 router.route('/deviceValue/:deviceName')
             .post((req,res)=>{
-                console.log("Device Value Updation ...");
+                console.log("Device Value Updation ..."+req.body.value);
                 Devices.findOneAndUpdate({name:req.params.deviceName},{value:req.body.value} ,{new:true} ,(err,doc)=>{
                     if(!err){
                         console.log(doc.name +"value updated successfully")

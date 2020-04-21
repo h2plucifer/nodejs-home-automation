@@ -8,8 +8,18 @@
     <input style="width:25%"  type="text" name="deviceType" id="deviceType" placeholder ="Device type (light/fan..)" required>
     <input style="width:25%" type="text" name="deviceStatus" id="deviceStatus" placeholder ="Device status(true=ON/false=OFF)" required>
     <button  class="btn btn-dark" id="addDevice" class="bg-info">Submit</button>
+    <button  class="btn btn-dark" id="dontAdd" class="bg-outline-info">Don't Add</button>
+
     <p/>
 </form>
+
+<script>
+    $(function(){
+        $('#dontAdd').click((e)=>{
+            window.location.reload(true);
+        })
+    })
+</script>
 
 
 
