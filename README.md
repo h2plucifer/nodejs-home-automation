@@ -1,7 +1,7 @@
 # nodejs-home-automation
 
 
-Markup : * Application details  :
+* Application details  :
               * Home-Automation is a web based application that provides features to monitor home devices remotely using this app.
               * Following operations can be performed with this app  :
                     * Add new device to monitor /control.
@@ -21,10 +21,9 @@ Markup : * Application details  :
                     * /deviceAPI/deviceRemove/:deviceName: To update  remove selected device .    
           * Assumption : It is assumed that middleware hardware connection & integration for devices has been already done by some service.
 
-Markup : * Technologies used :
+* Technologies used :
               * Node.js /Express.js , EJS , JQuery , Bootstrap , yarn
-
-Markup : * Steps Setup & run application:  :
+* Steps Setup & run application:  :
               * To install required modules  fire following command  from project root directory : yarn install
               * To run the application fire fire following command  from project root directory :yarn run start
               * To access the application in browser go to the following url : http://localhost:8080 
